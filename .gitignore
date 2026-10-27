@@ -1,0 +1,40 @@
+# ==========================================
+# SECRETS & CONFIGURATION (NE JAMAIS PARTAGER)
+# ==========================================
+.env
+application.properties
+*.env
+.env.local
+
+# ==========================================
+# ENVIRONNEMENTS & DÉPENDANCES
+# ==========================================
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node / Angular
+node_modules/
+.angular/
+dist/
+
+# Java / Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# ==========================================
+# IDE & OS
+# ==========================================
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# LOGS & TEMP
+# ==========================================
+*.log
+npm-debug.log*

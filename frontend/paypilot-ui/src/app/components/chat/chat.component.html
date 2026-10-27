@@ -1,0 +1,87 @@
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">P</div>
+      <div>
+        <h1>PayPilot <span>AI</span></h1>
+        <p>Autonomous shopping agent</p>
+      </div>
+    </div>
+    <div class="status"><i></i>Online</div>
+  </header>
+
+  <main class="feed">
+    @if (messages.length === 0) {
+      <section class="hero">
+        <div class="hero-badge">Powered by PayPal</div>
+        <h2>Tell me what you need.<br /><em>I'll handle the rest.</em></h2>
+        <p>I search, compare, fill your cart and prepare a secure PayPal checkout.</p>
+        <div class="chips">
+          @for (s of suggestions; track s.text) {
+            <button class="chip" (click)="useSuggestion(s.text)">
+              <span>{{ s.icon }}</span>{{ s.text }}
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    @for (m of messages; track $index) {
+      <div class="row" [class.user]="isUser(m)">
+        @if (!isUser(m)) { <div class="avatar">P</div> }
+        <div class="col">
+          @if (formatMessage(m.content)) {
+            <div class="bubble" [innerHTML]="formatMessage(m.content)"></div>
+          }
+
+          @if (!isUser(m) && images(m.content).length) {
+            <div class="gallery">
+              @for (u of images(m.content); track u) {
+                <figure class="product"><img [src]="u" alt="Product" loading="lazy" /></figure>
+              }
+            </div>
+          }
+
+          @if (!isUser(m) && payUrl(m.content); as url) {
+            <div class="pay-card">
+              <div class="pay-head">
+                <span class="lock">🔒</span>
+                <div>
+                  <strong>Secure checkout</strong>
+                  <small>Your order is ready for payment</small>
+                </div>
+              </div>
+              <a class="pay-btn" [href]="url" target="_blank" rel="noopener">
+                Pay with <b>PayPal</b>
+              </a>
+              <small class="pay-note">Sandbox mode · no real money is charged</small>
+            </div>
+          }
+
+          <span class="time">{{ time(m) }}</span>
+        </div>
+      </div>
+    }
+
+    @if (isLoading) {
+      <div class="row">
+        <div class="avatar">P</div>
+        <div class="col"><div class="bubble typing"><i></i><i></i><i></i></div></div>
+      </div>
+    }
+  </main>
+
+  <footer class="composer">
+    <div class="box">
+      <input
+        [(ngModel)]="inputMessage"
+        (keydown.enter)="sendMessage()"
+        placeholder="Ask PayPilot to find, compare and buy..."
+      />
+      <button (click)="sendMessage()" [disabled]="!inputMessage?.trim()" aria-label="Send">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>
+      </button>
+    </div>
+    <small>Press Enter to send · PayPilot never pays without your confirmation</small>
+  </footer>
+</div>
