@@ -1,0 +1,25 @@
+<div class="success-container">
+  <div class="card">
+    <div *ngIf="status === 'loading'" class="state loading">
+      <div class="spinner"></div>
+      <h1>⏳ Traitement du paiement...</h1>
+      <p>Veuillez patienter, nous vérifions votre paiement avec PayPal.</p>
+    </div>
+
+    <div *ngIf="status === 'success'" class="state success">
+      <div class="icon success-icon">✅</div>
+      <h1>Paiement confirmé !</h1>
+      <p>{{ message }}</p>
+    </div>
+
+    <div *ngIf="status === 'error'" class="state error">
+      <div class="icon error-icon">❌</div>
+      <h1>Erreur</h1>
+      <p>{{ message }}</p>
+    </div>
+
+    <button (click)="goBack()" class="btn">
+      Retour au chat
+    </button>
+  </div>
+</div>

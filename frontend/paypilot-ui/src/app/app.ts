@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { ChatComponent } from './components/chat/chat.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [ChatComponent],
-    templateUrl: './app.html',
-    styleUrls: ['./app.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
+  styles: [`:host { display: block; height: 100vh; }`]
 })
 export class App {
-    title = 'PayPilot AI';
+  title = 'PayPilot AI';
 }

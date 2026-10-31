@@ -1,3 +1,9 @@
 import { Routes } from '@angular/router';
+import { ChatComponent } from './components/chat/chat.component';
+import { Success } from './components/success/success';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', component: ChatComponent },
+  { path: 'success', component: Success },
+  { path: '**', redirectTo: '' }
+];
